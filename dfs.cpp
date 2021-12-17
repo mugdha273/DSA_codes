@@ -23,38 +23,34 @@ void printGraph(vector<int> adj[], int V)
 		printf("\n");
 	}
 }
+void dfs(int node, vector<int>&vis, vector<int>adj[], vector<int> &storeDFS)
+    {
+        storeDFS.push_back(node);
+        vis[node]= 1;
+        for(auto it: adj[node])
+        {
+            if(!vis[it])
+            {
+                dfs(it,vis, adj,storeDFS);
+            }
 
-vector<int> bfs(int V, vector<int> adj[]) 
-{
-	vector<int> bfs;
-	vector<int> vis(V + 1, 0);
-	vis[0] = 1;
+        }
+        
+    }
 
-	queue<int> q;
-	q.push(0);
-
-	for (int i = 0; i < V; i++)
-	{
-
-		while (!q.empty())
-		{
-			int node = q.front();
-			q.pop();
-			bfs.push_back(node);
-
-			for (auto it : adj[node])
-			{
-				if (!vis[it])
-				{
-					q.push(it);
-					bfs.push_back(it);
-					vis[it] = 1;
-				}
-			}
-		}
-	}
-	return bfs;
-}
+vector<int> dfsOfGraph(int V, vector<int> adj[]) {
+        // Code here
+        vector<int> storeDFS;
+        vector<int> vis(V+1, 0);
+        for(int i=0; i<V; i++)
+        {
+            if(!vis[i])
+            {
+                dfs(i, vis, adj, storeDFS);
+            }
+        }
+        return storeDFS;
+    }
 
 // // Driver code
 int main()
@@ -69,7 +65,7 @@ int main()
 	addEdge(adj, 2, 3);
 	addEdge(adj, 3, 4);
 	// printGraph(adj, V);
-	bfs(V, adj);
+	dfsOfGraph(V, adj);
 
 	return 0;
 }
