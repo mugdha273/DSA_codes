@@ -65,7 +65,13 @@ int main()
 	addEdge(adj, 2, 3);
 	addEdge(adj, 3, 4);
 	// printGraph(adj, V);
-	dfsOfGraph(V, adj);
+	vector<int>vec2 = dfsOfGraph(V, adj);
 
+    for(auto i: vec2)
+    {
+        cout<<i<<" ";
+    }
+
+    cout<<endl;
 	return 0;
 }
